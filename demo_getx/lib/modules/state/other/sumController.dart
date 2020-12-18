@@ -1,6 +1,7 @@
 import 'package:get/state_manager.dart';
 
 class SumController extends GetxController {
+  //这是一个RxInt变量
   final count1 = 0.obs;
   final count2 = 0.obs;
 

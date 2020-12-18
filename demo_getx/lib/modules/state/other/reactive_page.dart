@@ -35,6 +35,7 @@ class ReactivePage extends StatelessWidget {
               },
             ),
             Text("                        ="),
+            /// GetX中最简单的响应式小部件
             Obx(() => Text(
                   'Sum:                 ${Get.find<SumController>().sum}',
                   style: TextStyle(fontWeight: FontWeight.bold),

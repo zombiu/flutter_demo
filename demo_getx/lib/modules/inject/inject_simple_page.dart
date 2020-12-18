@@ -15,6 +15,7 @@ class InjectSimplePage extends GetView<InjectSimpleController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //这是一个异步耗时操作
           controller.getAge();
         },
         child: Icon(Icons.add),

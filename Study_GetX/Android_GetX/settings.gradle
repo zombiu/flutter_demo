@@ -1,0 +1,13 @@
+include ':app'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+  settingsDir,
+  '../flutter_getx_module/.android/include_flutter.groovy'
+))
+rootProject.name = "Android_GetX"
+
+include ':flutter_getx_module'
+project(':flutter_getx_module').projectDir = new File('../flutter_getx_module')
+
+include ':flutter_getx_module'
+project(':flutter_getx_module').projectDir = new File('../flutter_getx_module')

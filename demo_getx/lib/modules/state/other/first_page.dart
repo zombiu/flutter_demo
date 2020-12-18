@@ -5,6 +5,7 @@ import 'countController.dart';
 import 'userController.dart';
 
 class FirstPage extends StatelessWidget {
+  //初始化 CountController
   final CountController countController = Get.put(CountController());
   @override
   Widget build(BuildContext context) {
