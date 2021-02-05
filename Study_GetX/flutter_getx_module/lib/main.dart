@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_module/routes/app_pages.dart';
+import 'package:get/get.dart';
 
 void main() => runApp(MyApp());
 
@@ -90,6 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            GestureDetector(
+              onTap: _videoConference,
+              child: Text(
+                '视频会议',
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
@@ -106,5 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _videoConference() {
+    Get.toNamed(Routes.VIDEO_CONFERENCE_HOME);
   }
 }
