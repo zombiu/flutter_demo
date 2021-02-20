@@ -1,6 +1,6 @@
+import 'package:flutter_getx_module/count_test/view.dart';
+import 'package:flutter_getx_module/pages/video_conference.dart';
 import 'package:get/get.dart';
-
-
 
 part 'app_routes.dart';
 
@@ -8,10 +8,13 @@ part 'app_routes.dart';
 class AppPages {
   static const INITIAL = Routes.HOME;
 
-  static final routes = [
+  static const PROVIDER = "/provider";
+
+  static final pages = [
     GetPage(
-        name: Routes.VIDEO_CONFERENCE_HOME,
-        page: () => HomeView(),
+      name: Routes.VIDEO_CONFERENCE_HOME,
+      page: () => VideoConferenceHomePage(),
     ),
+    GetPage(name: PROVIDER, page: () => CountTestPage()),
   ];
 }
