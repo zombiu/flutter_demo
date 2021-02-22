@@ -43,7 +43,7 @@ class VideoConferenceBody extends StatelessWidget {
               },
               shrinkWrap: true),
           MeetingListWidget(),
-          Listener(
+          /*Listener(
             child: ConstrainedBox(
                 constraints: BoxConstraints.tight(Size(200, 200)),
                 child: Center(
@@ -51,7 +51,7 @@ class VideoConferenceBody extends StatelessWidget {
                 )),
             behavior: HitTestBehavior.translucent,//显性的修改behavior属性
             onPointerDown: (event) => print("onPointerDown"),
-          )
+          )*/
         ]);
   }
 
@@ -60,7 +60,7 @@ class VideoConferenceBody extends StatelessWidget {
       Container(
         decoration: BoxDecoration(color: Colors.blue),
         child: GestureDetector(
-          onTap: ()=> Get.toNamed(AppPages.PROVIDER),
+          onTap: () => Get.toNamed(AppPages.PROVIDER),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             // mainAxisSize: MainAxisSize.max,
@@ -113,13 +113,44 @@ class MeetingListWidget extends StatefulWidget {
 class _MeetingListWidgetState extends State<MeetingListWidget> {
   @override
   Widget build(BuildContext context) {
+    // Expanded 填充剩余空间
     return Expanded(
-        child: Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(color: Colors.grey),
-      child: Column(
-        children: [Icon(Icons.add), Text('当前暂无即将召开的会议')],
-      ),
+        child: Stack(
+      // 默认 StackFit.loose，如果需要填满布局，需要设置 StackFit.expand
+      fit: StackFit.expand,
+      children: [
+        ListView.builder(
+            itemCount: 20,
+            itemBuilder: (BuildContext context, int index) {
+              return _buildListViewItem(index);
+            }),
+        Visibility(
+          visible: false,
+          child: Container(
+            // alignment: Alignment.center,
+            decoration: BoxDecoration(color: Colors.grey),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Icon(Icons.add), Text('当前暂无即将召开的会议')],
+            ),
+          ),
+        ),
+      ],
     ));
+  }
+
+  Widget _buildListViewItem(int index) {
+    return Container(
+      height: 60,
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Text(
+            "预约会议 ${index}",
+            style: TextStyle(),
+          )
+        ],
+      ),
+    );
   }
 }

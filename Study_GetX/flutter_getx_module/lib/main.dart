@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
+      initialRoute: AppPages.INITIAL,
       home: MyHomePage(title: 'Flutter Demo Home Page'),
       getPages: AppPages.pages,
     );
@@ -61,12 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -92,6 +87,23 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            GestureDetector(
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tight(Size(300, 150)),
+                child: Container(
+                  color: Colors.blue,
+                  child: Center(
+                    child: Text('click me'),
+                  ),
+                ),
+              ),
+              onTapDown: (TapDownDetails details) {
+                print("onTap down");
+              },
+              onTapUp: (TapUpDetails details) {
+                print("onTap up");
+              },
             ),
           ],
         ),

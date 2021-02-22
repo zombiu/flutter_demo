@@ -9,7 +9,7 @@ import 'logic.dart';
 
 class CountTestPage extends StatelessWidget {
   final CountTestLogic logic = Get.put(CountTestLogic());
-  final Duration bottomSheetDuration = const Duration(milliseconds: 250);
+  final Duration bottomSheetDuration = const Duration(milliseconds: 2500);
   final double bottomSheetHeight = 200;
 
   @override
@@ -88,6 +88,12 @@ class CountTestPage extends StatelessWidget {
 
   get bottomSheet => Container(
         color: Colors.blueAccent,
+        child: Listener(
+          behavior:HitTestBehavior.opaque ,
+          onPointerDown: (PointerDownEvent event){
+            print("-->>点击了dialogis");
+          },
+        ),
       );
 
   get bottomSheetBoxMask => Container(
