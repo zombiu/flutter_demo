@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx_module/message/native_message.dart';
 import 'package:flutter_getx_module/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:native_call/native_call.dart';
 import 'package:nertc/nertc.dart';
+import 'package:package_info/package_info.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,7 +35,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-
   final String title;
 
   @override
@@ -45,10 +46,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     // ChannelManager.sendMessage({"method": "test", "content": "flutter 中的数据", "code": 100});
-    ChannelManager.sendMessage({"method": "test2", "content": "flutter 中的数据", "code": 100});
+    ChannelManager.sendMessage(
+        {"method": "test2", "content": "flutter 中的数据", "code": 100});
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    //注册flutter native 通信监听
+    ChannelManager.receiveMessage();
+    super.initState();
+    getInfo();
+
+    getVersion();
   }
 
   @override
@@ -108,7 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void getInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String versionText = packageInfo.version;
+    print("获取的版本是 $versionText");
+  }
+
   void _videoConference() {
     Get.toNamed(AppPages.VIDEO_CONFERENCE_HOME);
+  }
+
+  void getVersion() async{
+    String code = await NativeCall.platformVersion;
+    print("-->>获取的android版本 ${code}");
   }
 }
