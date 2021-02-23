@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_module/message/native_message.dart';
 import 'package:flutter_getx_module/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:nertc/nertc.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,14 +33,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -50,22 +44,20 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    // ChannelManager.sendMessage({"method": "test", "content": "flutter 中的数据", "code": 100});
+    ChannelManager.sendMessage({"method": "test2", "content": "flutter 中的数据", "code": 100});
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ChannelManager.receiveMessage();
+    // NERtcOptions()
+    // ChannelManager.sendMessage({"method": "test2", "content": "flutter 中的数据", "code": 101});
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
@@ -117,6 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _videoConference() {
-    Get.toNamed(Routes.VIDEO_CONFERENCE_HOME);
+    Get.toNamed(AppPages.VIDEO_CONFERENCE_HOME);
   }
 }

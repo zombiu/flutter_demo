@@ -19,6 +19,8 @@ public class UIDelegate {
     private ViewModelProvider viewModelProvider;
     private boolean isBackground = true;
 
+    private Application application;
+
     public static UIDelegate getInstance() {
         if (uiDelegate == null) {
             synchronized (UIDelegate.class) {
@@ -31,6 +33,7 @@ public class UIDelegate {
     }
 
     public void init(Application application) {
+        this.application = application;
         viewModelStore = new ViewModelStore();
         ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(application);
         viewModelProvider = new ViewModelProvider(viewModelStore, factory);

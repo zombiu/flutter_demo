@@ -25,5 +25,7 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        var channelPlugin = ChannelPlugin()
+        channelPlugin.register(flutterEngine)
     }
 }
