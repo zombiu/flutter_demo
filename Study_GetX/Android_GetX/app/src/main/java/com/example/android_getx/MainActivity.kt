@@ -11,6 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : FlutterActivity() {
+    //属性的延迟加载 lazy是一个函数，返回一个委托对象Lazy，而message最终在编译后，会被替换为Lazy对象。
+    private val message : String by lazy {
+        // 下面这段代码将在第一次访问message时执行
+       "123456"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)

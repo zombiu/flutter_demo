@@ -26,6 +26,8 @@ dependencies:
   #导入自定义插件
   native_call:
     path: ../native_call
+  #屏幕适配
+  flutter_screenutil: ^4.0.3+2
   #状态共享
   get:
   provider: ^4.3.3
