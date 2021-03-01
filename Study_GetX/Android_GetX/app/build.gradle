@@ -6,6 +6,18 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    //用来以arr形式接入flutter https://juejin.cn/post/6844904164972036103
+    repositories {
+        // 本地仓库路径 将非法符号\改为/
+        maven {
+            url 'D:/Android/AndroidStudioProjects/FlutterProjects/getx/flutter_demo-master/Study_GetX/flutter_getx_module/build/host/outputs/repo'
+        }
+        // flutter.so 和 flutter_embedding.jar 所在的远端仓库
+        maven {
+            url '$storageUrl/download.flutter.io'
+        }
+
+    }
 
     defaultConfig {
         applicationId "com.example.android_getx"
@@ -40,7 +52,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.lifecycle:lifecycle-process:2.2.0'
-    implementation project(path: ':flutter')
+    //以arr接入flutter module时 需要注释掉
+//    implementation project(path: ':flutter')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -51,5 +64,9 @@ dependencies {
 
 
     implementation 'com.blankj:utilcodex:1.30.6'
+
+    debugImplementation 'com.example.flutter_getx_module:flutter_debug:1.0'
+//    profileImplementation 'com.example.flutter_getx_module:flutter_profile:1.0'
+    releaseImplementation 'com.example.flutter_getx_module:flutter_release:1.0'
 
 }
