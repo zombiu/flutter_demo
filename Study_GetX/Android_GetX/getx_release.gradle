@@ -1,0 +1,6 @@
+ext.configs = [:]
+def sign = [:]
+sign.storePassword = "123456"
+sign.keyAlias = "android_getx"
+sign.keyPassword = "123456"
+configs.sign = sign

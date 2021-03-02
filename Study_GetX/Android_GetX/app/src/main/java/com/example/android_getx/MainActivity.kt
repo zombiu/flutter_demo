@@ -4,7 +4,8 @@ import android.os.Bundle
 import com.example.android_getx.utils.GitHubService
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugins.GeneratedPluginRegistrant
+import io.flutter.embedding.engine.FlutterEngineCache
+import io.flutter.embedding.engine.dart.DartExecutor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,5 +38,21 @@ class MainActivity : FlutterActivity() {
 
         var channelPlugin = ChannelPlugin()
         channelPlugin.register(flutterEngine)
+    }
+
+    private fun createFlutterEngine(): FlutterEngine {
+        // 实例化FlutterEngine对象
+        val flutterEngine = FlutterEngine(this)
+        // 设置初始路由
+        flutterEngine.navigationChannel.setInitialRoute(
+            "route1?{\"name\":\"" + "yulong" + "\"}"
+        )
+        // 开始执行dart代码来pre-warm FlutterEngine
+        flutterEngine.dartExecutor.executeDartEntrypoint(
+            DartExecutor.DartEntrypoint.createDefault()
+        )
+        // 缓存FlutterEngine
+        FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine)
+        return flutterEngine
     }
 }

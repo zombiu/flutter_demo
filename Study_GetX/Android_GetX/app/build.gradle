@@ -29,10 +29,30 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+        }
         release {
-            minifyEnabled false
+            storeFile file('android_getx.jks')
+            storePassword configs.sign.storePassword
+            keyAlias configs.sign.keyAlias
+            keyPassword configs.sign.keyPassword
+        }
+    }
+    buildTypes {
+        debug {
+//            applicationIdSuffix ".debug"
+//            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            ndk {
+                abiFilters 'armeabi-v7a'
+            }
         }
     }
     compileOptions {
