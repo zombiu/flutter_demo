@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_module/message/native_message.dart';
 import 'package:flutter_getx_module/routes/app_pages.dart';
@@ -13,6 +15,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var defaultRouteName = window.defaultRouteName;
+    print("-->>获取的路由 $defaultRouteName");
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

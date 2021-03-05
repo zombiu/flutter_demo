@@ -1,5 +1,6 @@
 package com.example.android_getx
 
+import android.content.Context
 import android.os.Bundle
 import com.example.android_getx.utils.GitHubService
 import io.flutter.embedding.android.FlutterActivity
@@ -29,7 +30,17 @@ class MainActivity : FlutterActivity() {
             .build()
 
         val service = retrofit.create(GitHubService::class.java)
+
     }
+
+    /**
+     * 自定义FlutterActivity时，用来设置缓存FlutterEngine
+     */
+    /*override fun getCachedEngineId(): String? {
+        return "my_engine_id"
+    }*/
+
+    override fun provideFlutterEngine(context: Context): FlutterEngine? = FlutterEngineCache.getInstance().get("my_engine_id")
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

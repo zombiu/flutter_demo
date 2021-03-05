@@ -23,7 +23,7 @@ public class MyApplication extends Application {
         // 实例化FlutterEngine对象
         mFlutterEngine = new FlutterEngine(this);
         // 设置初始路由
-        mFlutterEngine.getNavigationChannel().setInitialRoute("route1");
+//        mFlutterEngine.getNavigationChannel().setInitialRoute("/video_conference_home");
         // 开始执行dart代码来pre-warm FlutterEngine
         mFlutterEngine.getDartExecutor().executeDartEntrypoint(
                 DartExecutor.DartEntrypoint.createDefault()

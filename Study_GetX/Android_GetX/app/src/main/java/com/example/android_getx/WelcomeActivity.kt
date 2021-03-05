@@ -12,6 +12,9 @@ class WelcomeActivity : AppCompatActivity() {
     private val go_flutter_page_btn: Button by lazy {
         findViewById(R.id.go_flutter_page_btn)
     }
+    private val go_flutter_page_btn2: Button by lazy {
+        findViewById(R.id.go_flutter_page_btn2)
+    }
 
     private lateinit var flutterEngine: FlutterEngine
 
@@ -28,22 +31,37 @@ class WelcomeActivity : AppCompatActivity() {
             flutterEngine = createFlutterEngine()
             // 创建MethodChannel
 //            createMethodChannel()
-            // 跳转FlutterActivity
-            startActivity(
-                FlutterActivity
-                    .withCachedEngine("my_engine_id")
-                    .build(this)
+
+            // 设置初始路由
+            flutterEngine.navigationChannel.setInitialRoute("/provider")
+            // 开始执行dart代码来pre-warm FlutterEngine
+            flutterEngine.dartExecutor.executeDartEntrypoint(
+                DartExecutor.DartEntrypoint.createDefault()
             )
+            // 跳转FlutterActivity
+            var intent = FlutterActivity
+                .withCachedEngine("my_engine_id")
+                .build(this)
+            //withNewEngine() 可以设置 route
+            intent.putExtra("route", "/provider")
+            startActivity(intent)
+        }
+
+        go_flutter_page_btn2.setOnClickListener {
+            FlutterMainActivity.start(this)
         }
     }
 
     private fun createFlutterEngine(): FlutterEngine {
         // 实例化FlutterEngine对象
-        val flutterEngine = FlutterEngine(this)
+        var flutterEngine = FlutterEngineCache.getInstance().get("my_engine_id")
+        if (flutterEngine == null) {
+            flutterEngine = FlutterEngine(this)
+        }
         // 设置初始路由
-        /*flutterEngine.navigationChannel.setInitialRoute(
+        flutterEngine.navigationChannel.setInitialRoute(
             "route1?{\"name\":\"" + "yulong" + "\"}"
-        )*/
+        )
         // 开始执行dart代码来pre-warm FlutterEngine
         flutterEngine.dartExecutor.executeDartEntrypoint(
             DartExecutor.DartEntrypoint.createDefault()
