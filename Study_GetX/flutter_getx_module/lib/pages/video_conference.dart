@@ -26,6 +26,7 @@ class VideoConferenceBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var widgets = buildGridItems();
+    print("-->>获取的参数为 ${Get.parameters['name']}");
     return Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,

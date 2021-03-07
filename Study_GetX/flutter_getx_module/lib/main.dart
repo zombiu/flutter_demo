@@ -71,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("-->>_MyHomePageState.build");
     // 初始化
     ScreenUtil.init(
       // 设备像素大小(必须在首页中获取)

@@ -60,7 +60,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
         // 设置初始路由
         flutterEngine.navigationChannel.setInitialRoute(
-            "route1?{\"name\":\"" + "yulong" + "\"}"
+            "/video_conference_home?name=yulong"
         )
         // 开始执行dart代码来pre-warm FlutterEngine
         flutterEngine.dartExecutor.executeDartEntrypoint(

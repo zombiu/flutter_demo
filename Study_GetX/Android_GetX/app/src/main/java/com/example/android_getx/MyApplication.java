@@ -21,7 +21,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // 实例化FlutterEngine对象
-        mFlutterEngine = new FlutterEngine(this);
+        /*mFlutterEngine = new FlutterEngine(this);
         // 设置初始路由
 //        mFlutterEngine.getNavigationChannel().setInitialRoute("/video_conference_home");
         // 开始执行dart代码来pre-warm FlutterEngine
@@ -31,7 +31,7 @@ public class MyApplication extends Application {
         // 缓存FlutterEngine
         FlutterEngineCache
                 .getInstance()
-                .put("my_engine_id", mFlutterEngine);
+                .put("my_engine_id", mFlutterEngine);*/
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
