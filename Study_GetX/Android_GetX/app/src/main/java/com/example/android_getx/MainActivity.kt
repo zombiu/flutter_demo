@@ -2,6 +2,7 @@ package com.example.android_getx
 
 import android.content.Context
 import android.os.Bundle
+import com.blankj.utilcode.util.LogUtils
 import com.example.android_getx.utils.GitHubService
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -40,10 +41,19 @@ class MainActivity : FlutterActivity() {
         return "my_engine_id"
     }*/
 
-    override fun provideFlutterEngine(context: Context): FlutterEngine? = FlutterEngineCache.getInstance().get("my_engine_id")
+    override fun provideFlutterEngine(context: Context): FlutterEngine? {
+        var engine = FlutterEngineCache.getInstance().get("my_engine_id")
+        if (engine == null) {
+            engine = createFlutterEngine()
+        }
+        return engine
+    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        LogUtils.e("--<< 保存的引擎是 ${flutterEngine}")
+        // 缓存FlutterEngine
+//        FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine)
         //自动注册插件，无须手动注册
 //        GeneratedPluginRegistrant.registerWith(flutterEngine);
 
@@ -56,7 +66,7 @@ class MainActivity : FlutterActivity() {
         val flutterEngine = FlutterEngine(this)
         // 设置初始路由
         flutterEngine.navigationChannel.setInitialRoute(
-            "route1?{\"name\":\"" + "yulong" + "\"}"
+            "/provider?{\"name\":\"" + "yulong" + "\"}"
         )
         // 开始执行dart代码来pre-warm FlutterEngine
         flutterEngine.dartExecutor.executeDartEntrypoint(
