@@ -44,7 +44,8 @@ class WelcomeActivity : AppCompatActivity() {
             //withNewEngine() 可以设置 route*/
 
             var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("route", "/provider")
+            //使用缓存FlutterEngine时 此字段不生效
+//            intent.putExtra("route", "/provider")
             startActivity(intent)
         }
 

@@ -74,6 +74,7 @@ class MainActivity : FlutterActivity() {
         )
         // 缓存FlutterEngine
         FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine)
+        LogUtils.e("-->>intent","${intent.extras.toString()}")
         return flutterEngine
     }
 }
